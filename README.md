@@ -23,7 +23,7 @@ Vue.use(VueLazy);
 If you want to register a directive locally:
 
 ```js
-import lazy from '@mintjamsinc/vue-lazy';
+import {lazy} from '@mintjamsinc/vue-lazy';
 export default {
   directives: {
     lazy,

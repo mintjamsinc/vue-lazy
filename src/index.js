@@ -2,7 +2,7 @@
 
 import Vue from 'vue';
 
-const version = '1.1.1';
+const version = '1.1.2';
 
 const compatible = (/^2\./).test(Vue.version);
 if (!compatible) {
