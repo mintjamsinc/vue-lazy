@@ -2,7 +2,7 @@
 
 import Vue from 'vue';
 
-const version = '1.0.0';
+const version = '1.0.1';
 
 const compatible = (/^2\./).test(Vue.version);
 if (!compatible) {
@@ -12,9 +12,6 @@ if (!compatible) {
 export const lazy = {
 	inserted(el, binding/* , vnode */) {
 		const setSrc = function(value) {
-			if (!value.startsWith('url(')) {
-				value = 'url(' + value + ')';
-			}
 			el.setAttribute('src', value);
 		};
 		const setBackgroundImage = function(value) {
