@@ -2,7 +2,7 @@
 
 import Vue from 'vue';
 
-const version = '1.2.0';
+const version = '1.2.1';
 
 const compatible = (/^2\./).test(Vue.version);
 if (!compatible) {
@@ -19,8 +19,12 @@ const setBackgroundImage = function(el, value) {
 	if (typeof value == 'function') {
 		value = value();
 	}
-	if (!value.startsWith('url(')) {
-		value = 'url(' + value + ')';
+	if (!value) {
+		value = '';
+	} else {
+		if (!value.startsWith('url(')) {
+			value = 'url(' + value + ')';
+		}
 	}
 	el.style.backgroundImage = value;
 };
