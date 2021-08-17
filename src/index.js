@@ -2,7 +2,7 @@
 
 import Vue from 'vue';
 
-const version = '1.0.1';
+const version = '1.1.1';
 
 const compatible = (/^2\./).test(Vue.version);
 if (!compatible) {
@@ -10,38 +10,29 @@ if (!compatible) {
 }
 
 export const lazy = {
-	inserted(el, binding/* , vnode */) {
+	bind(el, binding/* , vnode */) {
 		const setSrc = function(value) {
+			if (typeof value == 'function') {
+				value = value();
+			}
 			el.setAttribute('src', value);
 		};
 		const setBackgroundImage = function(value) {
+			if (typeof value == 'function') {
+				value = value();
+			}
 			if (!value.startsWith('url(')) {
 				value = 'url(' + value + ')';
 			}
 			el.style.backgroundImage = value;
 		};
 		const onEnter = function() {
-			if (binding.modifiers && binding.modifiers['src']) {
-				if (typeof binding.value === 'string') {
-					setSrc(binding.value);
-					return;
-				}
-				if (typeof binding.value === 'function') {
-					setSrc(binding.value());
-					return;
-				}
+			if (binding.arg == 'src') {
+				setSrc(binding.value);
 				return;
 			}
-
-			if (binding.modifiers && binding.modifiers['background-image']) {
-				if (typeof binding.value === 'string') {
-					setBackgroundImage(binding.value);
-					return;
-				}
-				if (typeof binding.value === 'function') {
-					setBackgroundImage(binding.value());
-					return;
-				}
+			if (binding.arg == 'background-image') {
+				setBackgroundImage(binding.value);
 				return;
 			}
 		};
@@ -56,6 +47,8 @@ export const lazy = {
 					}
 				}
 			}).observe(el);
+		} else {
+			onEnter();
 		}
 	},
 };
