@@ -2,7 +2,7 @@
 
 import Vue from 'vue';
 
-const version = '1.2.1';
+const version = '1.2.2';
 
 const compatible = (/^2\./).test(Vue.version);
 if (!compatible) {
@@ -12,6 +12,9 @@ if (!compatible) {
 const setSrc = function(el, value) {
 	if (typeof value == 'function') {
 		value = value();
+	}
+	if (!value) {
+		value = '';
 	}
 	el.setAttribute('src', value);
 };
@@ -30,9 +33,9 @@ const setBackgroundImage = function(el, value) {
 };
 const onEnter = function(el, binding) {
 	if (binding.arg == 'src') {
-		setSrc(binding.value);
+		setSrc(el, binding.value);
 	} else if (binding.arg == 'background-image') {
-		setBackgroundImage(binding.value);
+		setBackgroundImage(el, binding.value);
 	}
 	el.dataset.vueLazyOnEnter = true;
 };

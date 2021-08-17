@@ -1,6 +1,6 @@
 {
   "name": "@mintjamsinc/vue-lazy",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A reusable lazy directive for Vue.js 2.x.",
   "main": "dist/bundle.min.js",
   "scripts": {
